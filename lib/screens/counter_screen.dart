@@ -10,6 +10,28 @@ class CounterScreen extends StatefulWidget{
 
 class _CounterScreenState extends State<CounterScreen> {
    int contador = 10;
+
+   void incrementar(){
+    contador++;
+    setState(() {
+      
+    });
+   }
+    void decrementar(){
+    contador--;
+    setState(() {
+      
+    });
+   }
+    void reset(){
+    contador=0;
+    setState(() {
+      
+    });
+   }
+
+
+
   @override
   Widget build(BuildContext context) {
     const TamanoDeLaLetra =  TextStyle(fontSize: 30);
@@ -36,52 +58,51 @@ class _CounterScreenState extends State<CounterScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
-      floatingActionButton: Row(
-       mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+      floatingActionButton: CustomFloatingButton(incrementarFunc: incrementar, decrementarFunc: decrementar, reset: reset,),
+    );
+  }
+}
+
+class CustomFloatingButton extends StatelessWidget {
+
+  final Function incrementarFunc;
+  final Function decrementarFunc;
+  final Function reset;
+
+  const CustomFloatingButton({
+    Key? key, required this.incrementarFunc, required this.decrementarFunc, required this.reset,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+     
+      children: [
+       
+        FloatingActionButton(
+          //child: const Text("Hola"),
+           child: const Icon(Icons.exposure_minus_1),
          
+            onPressed: () => {decrementarFunc(),
+          },),
+
+          const SizedBox(width: 20,),
+
+           FloatingActionButton(
+          //child: const Text("Hola"),
+          child: const Text("Reset"),
+           onPressed: () => {reset(),
+          },),
+
+          const SizedBox(width: 20,),
+
           FloatingActionButton(
-            //child: const Text("Hola"),
-            child: const Icon(Icons.plus_one),
-            onPressed: () => {
-            
-            setState(() {
-              contador++;
-              print('$contador');
-              
-            })
-            
-            },),
-            SizedBox(width: 20,),
-             FloatingActionButton(
-            //child: const Text("Hola"),
-            child: const Text("Reset"),
-            onPressed: () => {
-            
-            setState(() {
-              contador = 0;
-              print('$contador');
-              
-            })
-            
-
-            },),
-            SizedBox(width: 20,),
-
-            FloatingActionButton(
-            //child: const Text("Hola"),
-            child: const Icon(Icons.exposure_minus_1),
-            onPressed: () => {
-            
-            setState(() {
-              contador--;
-              print('$contador');
-              
-            })
-            
-            },)
-        ],
-      ),
+          //child: const Text("Hola"),
+         child: const Icon(Icons.plus_one),
+          onPressed: () => {incrementarFunc(),
+          },),
+      ],
     );
   }
 }
