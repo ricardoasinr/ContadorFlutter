@@ -20,7 +20,7 @@ class _CounterScreenState extends State<CounterScreen> {
      //backgroundColor: Color.fromARGB(153, 242, 242, 242),
       appBar: AppBar(
         title: const Text("Home Screen"),
-        elevation: 10.0,
+        //elevation: 10.0,
 
       ) ,
 
@@ -35,18 +35,53 @@ class _CounterScreenState extends State<CounterScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        //child: const Text("Hola"),
-        child: const Icon(Icons.plus_one),
-        onPressed: () => {
-        
-        setState(() {
-          contador++;
-          print('$contador');
-          
-        })
-        
-        },),
+
+      floatingActionButton: Row(
+       mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+         
+          FloatingActionButton(
+            //child: const Text("Hola"),
+            child: const Icon(Icons.plus_one),
+            onPressed: () => {
+            
+            setState(() {
+              contador++;
+              print('$contador');
+              
+            })
+            
+            },),
+            SizedBox(width: 20,),
+             FloatingActionButton(
+            //child: const Text("Hola"),
+            child: const Text("Reset"),
+            onPressed: () => {
+            
+            setState(() {
+              contador = 0;
+              print('$contador');
+              
+            })
+            
+
+            },),
+            SizedBox(width: 20,),
+
+            FloatingActionButton(
+            //child: const Text("Hola"),
+            child: const Icon(Icons.exposure_minus_1),
+            onPressed: () => {
+            
+            setState(() {
+              contador--;
+              print('$contador');
+              
+            })
+            
+            },)
+        ],
+      ),
     );
   }
 }
